@@ -1,0 +1,52 @@
+[
+	{
+		"nom": "Poulet au curry",
+		"prix": "20 000 Ar",
+		"vente": 26
+	},
+	{
+		"nom": "Jiaozi",
+		"prix": "15 000 Ar",
+		"vente": 23
+	},
+	{
+		"nom": "Canard laqué",
+		"prix": "50 000 Ar",
+		"vente": 22
+	},
+	{
+		"nom": "Nouilles sautées",
+		"prix": "15 000 Ar",
+		"vente": 20
+	},
+	{
+		"nom": "lion's head",
+		"prix": "20 000 Ar",
+		"vente": 18
+	},
+	{
+		"nom": "Soupe aigre-piquante",
+		"prix": "18 000 Ar",
+		"vente": 18
+	},
+	{
+		"nom": "Tofu mapo",
+		"prix": "16 000 Ar",
+		"vente": 15
+	},
+	{
+		"nom": "Poisson entier à la vapeur",
+		"prix": "55 000 Ar",
+		"vente": 14
+	},
+	{
+		"nom": "Crevettes sauce aux haricots noirs",
+		"prix": "30 000 Ar",
+		"vente": 14
+	},
+	{
+		"nom": "Poulet au caramel",
+		"prix": "35 000 Ar",
+		"vente": 10
+	}
+]
