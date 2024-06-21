@@ -17,7 +17,7 @@ export default function ReservationDispo({
 	reservations,
 }: ReservationDispoProps) {
 	return (
-		<Card className="w-full h-full">
+		<Card className="w-full h-full ">
 			<CardHeader className="h-1/6">
 				<CardTitle className="flex flex-row items-center h-full ">
 					<p className=" w-3/4">Table disponible pour le :</p>
@@ -28,13 +28,17 @@ export default function ReservationDispo({
 				<ScrollArea className="h-full w-full rounded-md border">
 					{reservations.map((item, index) => (
 						<div key={index} className="flex flex-row m-4">
-							<p key={index} className=" w-2/5 flex items-center">
+							<p key={index + item.nom} className=" w-2/5 flex items-center">
 								{item.nom}
 							</p>
-							<p key={index} className=" w-1/5 flex justify-center">
+							<p
+								key={index + item.places_max}
+								className=" w-1/5 flex justify-center">
 								{item.places_max}
 							</p>
-							<p key={index} className=" w-2/5 flex justify-center">
+							<p
+								key={index + item.heure_debut + item.heure_fin}
+								className=" w-2/5 flex justify-center">
 								{item.heure_debut} - {item.heure_fin}
 							</p>
 						</div>
