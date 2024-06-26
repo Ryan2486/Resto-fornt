@@ -1,6 +1,32 @@
+"use client";
+
+import axios from "@/lib/axios";
+import { useEffect, useState } from "react";
 import { Reservation } from "../Model";
 import { columns } from "./columns";
 import { DataTable } from "./tables";
+
+export default function page() {
+	const [reservations, setreservations] = useState<Reservation[]>([]);
+	useEffect(() => {
+		const fetchData = async () => {
+			try {
+				const response = await axios.get("/reservations");
+				setreservations(response.data);
+			} catch (error: any) {
+				console.log(error);
+			}
+		};
+		fetchData();
+	}, []);
+
+	return (
+		<div>
+			<DataTable columns={columns} data={reservations} />
+		</div>
+	);
+}
+
 async function getData(): Promise<Reservation[]> {
 	// Fetch data from your API here.
 	return [
@@ -115,13 +141,4 @@ async function getData(): Promise<Reservation[]> {
 			},
 		},
 	];
-}
-
-export default async function page() {
-	const data = await getData();
-	return (
-		<div>
-			<DataTable columns={columns} data={data} />
-		</div>
-	);
 }

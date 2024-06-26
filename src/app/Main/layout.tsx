@@ -9,7 +9,7 @@ export default function RootLayout({
 }>) {
 	return (
 		<div className="flex flex-row h-screen w-full cursor-default">
-			<div className="flex flex-col items-center bg-[#004085] text-white w-[300px] p-4 space-y-4 fixed left-0 top-0 h-full">
+			<div className="flex flex-col items-center bg-[#004085] text-white w-[300px] p-4 space-y-4 fixed left-0 top-0 h-full z-10">
 				<Image src={"/Lotus_Blue.png"} alt="Logo" width="200" height={200} />
 				<Link
 					href={"http://localhost:3000/Main"}
@@ -36,7 +36,7 @@ export default function RootLayout({
 					<p className="text-2xl">Commande</p>
 				</Link>
 			</div>
-			<div className="flex-1 ml-[300px] p-4">{children}</div>
+			<div className="flex-1 ml-[300px] p-4 z-0">{children}</div>
 		</div>
 	);
 }

@@ -1,30 +1,32 @@
+"use client";
+
+import axios from "@/lib/axios";
+import { useEffect, useState } from "react";
 import { menu } from "../Model";
-import { columns } from "./columns";
+import { columnsAndCallback } from "./columns";
 import { DataTable } from "./tables";
-async function getData(): Promise<menu[]> {
-	// Fetch data from your API here.
-	return [
-		{ idplat: "CURR-001", nomplat: "Poulet au curry", pu: 20000 },
-		{ idplat: "JIAO-002", nomplat: "Jiaozi", pu: 15000 },
-		{ idplat: "CLQ-003", nomplat: "Canard laquÃ©", pu: 50000 },
-		{ idplat: "NOUD-004", nomplat: "Nouilles sautÃ©es", pu: 15000 },
-		{ idplat: "LHEA-005", nomplat: "Lion s head", pu: 20000 },
-		{ idplat: "SOUP-006", nomplat: "Soupe aigre-piquante", pu: 18000 },
-		{ idplat: "TOFU-007", nomplat: "Tofu mapo", pu: 16000 },
-		{ idplat: "POIS-008", nomplat: "Poisson entier Ã  la vapeur", pu: 55000 },
-		{
-			idplat: "CREV-009",
-			nomplat: "Crevettes sauce aux haricots noirs",
-			pu: 30000,
-		},
-		{ idplat: "CARA-010", nomplat: "Poulet au caramel", pu: 35000 },
-	];
-}
-export default async function page() {
-	const data = await getData();
+export default function page() {
+	const [menus, setMenus] = useState<menu[]>([]);
+	const fetchData = async () => {
+		try {
+			const response = await axios.get("/menus");
+			setMenus(response.data);
+		} catch (error: any) {
+			console.log(error);
+		}
+	};
+	useEffect(() => {
+		fetchData();
+	}, []);
+
+	const AddCallback = (data: menu) => {
+		console.log(data);
+		setMenus((prev) => [...prev, data]);
+	};
+	const columns = columnsAndCallback(fetchData);
 	return (
 		<div>
-			<DataTable columns={columns} data={data} />
+			<DataTable columns={columns} data={menus} AddCallback={AddCallback} />
 		</div>
 	);
 }

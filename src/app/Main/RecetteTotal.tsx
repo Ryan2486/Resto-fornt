@@ -4,6 +4,10 @@ interface RecetteTotalprops {
 	total: number;
 }
 export default function RecetteTotal({ total }: RecetteTotalprops) {
+	const formatter = new Intl.NumberFormat("fr-FR", {
+		style: "currency",
+		currency: "MGA",
+	});
 	return (
 		<Card className="w-full h-full">
 			<CardHeader className="h-1/6">
@@ -11,8 +15,8 @@ export default function RecetteTotal({ total }: RecetteTotalprops) {
 					<p>Recette Total :</p>
 				</CardTitle>
 			</CardHeader>
-			<CardContent className="h-5/6 flex flex-row justify-center">
-				<p>{total} Ar</p>
+			<CardContent className="h-5/6 flex flex-row justify-center font-bold">
+				<p>{formatter.format(total)}</p>
 			</CardContent>
 		</Card>
 	);

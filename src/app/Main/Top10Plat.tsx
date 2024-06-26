@@ -11,6 +11,10 @@ interface Top10PlatProps {
 }
 
 export default function Top10Plat({ Top10 }: Top10PlatProps) {
+	const formatter = new Intl.NumberFormat("fr-FR", {
+		style: "currency",
+		currency: "MGA",
+	});
 	return (
 		<Card className="h-full w-full">
 			<CardHeader className="h-1/6">

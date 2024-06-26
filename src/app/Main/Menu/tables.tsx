@@ -12,7 +12,8 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import ModalAdd from "./ModalAdd";
+import { menu } from "../Model";
+import ModalAdd from "./Modal/ModalAdd";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -28,11 +29,13 @@ import {
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
+	AddCallback: (data: menu) => void;
 }
 
 export function DataTable<TData, TValue>({
 	columns,
 	data,
+	AddCallback,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -57,7 +60,7 @@ export function DataTable<TData, TValue>({
 		<div>
 			<div className="flex flex-row space-x-4">
 				<div className="flex items-center py-4">
-					<ModalAdd />
+					<ModalAdd AddCallback={AddCallback} />
 				</div>
 				<div className="flex items-center py-4">
 					<Input
@@ -113,7 +116,7 @@ export function DataTable<TData, TValue>({
 								<TableCell
 									colSpan={columns.length}
 									className="h-24 text-center">
-									No results.
+									Aucun Resultat
 								</TableCell>
 							</TableRow>
 						)}

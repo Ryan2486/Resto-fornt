@@ -40,6 +40,7 @@ export default function DialogDemo() {
 							Nom Client
 						</Label>
 						<Input
+							required
 							id="nomplat"
 							placeholder="Désignation du plat"
 							className="col-span-3"
