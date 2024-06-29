@@ -1,6 +1,16 @@
 "use client";
 import * as React from "react";
 
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -14,28 +24,14 @@ import {
 } from "@tanstack/react-table";
 import AddModal from "./Modal/AddModal";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
-import { Reservation } from "../Model";
-
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
 	data: TData[];
-	AddDataFct: (newReservation: Reservation) => void;
 }
 
 export function DataTable<TData, TValue>({
 	columns,
 	data,
-	AddDataFct,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -60,16 +56,16 @@ export function DataTable<TData, TValue>({
 		<div>
 			<div className="flex flex-row space-x-4">
 				<div className="flex items-center py-4">
-					<AddModal AddDataFct={AddDataFct} />
+					<AddModal></AddModal>
 				</div>
 				<div className="flex items-center py-4">
 					<Input
-						placeholder="Filter nom Client..."
+						placeholder="Filter designation..."
 						value={
-							(table.getColumn("nomcli")?.getFilterValue() as string) ?? ""
+							(table.getColumn("designation")?.getFilterValue() as string) ?? ""
 						}
 						onChange={(event) =>
-							table.getColumn("nomcli")?.setFilterValue(event.target.value)
+							table.getColumn("designation")?.setFilterValue(event.target.value)
 						}
 						className="max-w-sm"
 					/>
@@ -116,7 +112,7 @@ export function DataTable<TData, TValue>({
 								<TableCell
 									colSpan={columns.length}
 									className="h-24 text-center">
-									No results.
+									Aucun Resultat
 								</TableCell>
 							</TableRow>
 						)}

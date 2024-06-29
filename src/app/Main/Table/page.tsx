@@ -2,18 +2,18 @@
 
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
-import { menu } from "../Model";
+import { Table } from "../Model";
 import { Notif } from "../Notif";
 import { columnsAndCallback } from "./columns";
 import { DataTable } from "./tables";
 
 export default function page() {
-	const [menus, setMenus] = useState<menu[]>([]);
-	const { NotificationSuccessDelete, NotificationError } = Notif();
+	const [tables, setTables] = useState<Table[]>([]);
+	const { NotificationError, NotificationSuccessDelete } = Notif();
 	const fetchData = async () => {
 		try {
-			const response = await axios.get("/menus");
-			setMenus(response.data);
+			const response = await axios.get("/tables");
+			setTables(response.data);
 		} catch (error: any) {
 			console.log(error);
 		}
@@ -21,19 +21,14 @@ export default function page() {
 	useEffect(() => {
 		fetchData();
 	}, []);
-
-	const AddCallback = (data: menu) => {
-		console.log(data);
-		setMenus((prev) => [...prev, data]);
-	};
 	const columns = columnsAndCallback(
-		NotificationSuccessDelete,
+		fetchData,
 		NotificationError,
-		fetchData
+		NotificationSuccessDelete
 	);
 	return (
 		<div>
-			<DataTable columns={columns} data={menus} AddCallback={AddCallback} />
+			<DataTable columns={columns} data={tables}></DataTable>
 		</div>
 	);
 }

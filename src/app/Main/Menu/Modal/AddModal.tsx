@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { menu } from "../../Model";
-import FormAdd from "./Form/FormAdd";
+import FormAdd from "./Form/AddModal";
 interface ChildComponentProps {
 	AddCallback: (data: menu) => void;
 }

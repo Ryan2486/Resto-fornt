@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import { LayoutGrid, SquareMenu } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -26,6 +27,11 @@ export default function RootLayout({
 					<p className="text-2xl ">Menu</p>
 				</Link>
 				<Link
+					href={"http://localhost:3000/Main/Table"}
+					className="flex items-center justify-center space-x-2 h-14 rounded-lg hover:bg-white hover:text-[#004085] w-full cursor-pointer">
+					<p className="text-2xl">Table</p>
+				</Link>
+				<Link
 					href={"http://localhost:3000/Main/Reservation"}
 					className="flex items-center justify-center space-x-2 h-14 rounded-lg hover:bg-white hover:text-[#004085] w-full cursor-pointer">
 					<p className="text-2xl ">Réservation</p>
@@ -37,6 +43,7 @@ export default function RootLayout({
 				</Link>
 			</div>
 			<div className="flex-1 ml-[300px] p-4 z-0">{children}</div>
+			<Toaster />
 		</div>
 	);
 }

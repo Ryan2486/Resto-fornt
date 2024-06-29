@@ -1,13 +1,16 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
+import axios from "@/lib/axios";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import moment from "moment";
 import { Reservation } from "../Model";
-import ModalModifier from "./Modal/ModalModifier";
+import ModalModifier from "./Modal/UpdateModal";
 
-export const columns: ColumnDef<Reservation>[] = [
+export const columnsAndCallback = (
+	Refecth: () => Promise<void>
+): ColumnDef<Reservation>[] => [
 	{
 		accessorKey: "idreserv",
 		header: "ID de reservation",
@@ -47,15 +50,34 @@ export const columns: ColumnDef<Reservation>[] = [
 	},
 	{
 		id: "actions",
-		header: "Action",
+		header: () => <p className="text-center">Action</p>,
 		cell: ({ row }) => {
 			const reservation = row.original;
 
 			return (
-				<div>
-					<ModalModifier></ModalModifier>
+				<div className="space-x-3 text-center">
+					<ModalModifier
+						reservation={reservation}
+						refetch={Refecth}></ModalModifier>
+					<Button
+						variant="destructive"
+						onClick={() => {
+							DeleteReservationFct(reservation.idreserv, Refecth);
+						}}>
+						Supprimer
+					</Button>
 				</div>
 			);
 		},
 	},
 ];
+
+const DeleteReservationFct = async (
+	idreserv: string,
+	Refecth: () => Promise<void>
+) => {
+	try {
+		const rep = await axios.delete("/reservations/" + idreserv);
+		Refecth();
+	} catch (error) {}
+};

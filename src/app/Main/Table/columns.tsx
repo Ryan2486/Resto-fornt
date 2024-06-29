@@ -4,39 +4,36 @@ import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { menu } from "../Model";
-import ModalMofi from "./Modal/UpdateModal";
+import { Table } from "../Model";
 
 export const columnsAndCallback = (
-	NotifDeleteSucc: (Msg: string) => void,
-	NotifDeleteErr: (Msg: string) => void,
-	Refecth: () => Promise<void>
-): ColumnDef<menu>[] => [
+	Refecth: () => Promise<void>,
+	NotifcationErr: (Msg: string) => void,
+	NotifcationDelete: (Msg: string) => void
+): ColumnDef<Table>[] => [
 	{
-		accessorKey: "idplat",
-		header: "ID du plat",
+		accessorKey: "idtable",
+		header: "ID de la table",
 	},
 	{
-		accessorKey: "nomplat",
+		accessorKey: "designation",
 		header: ({ column }) => {
 			return (
 				<Button
 					variant="ghost"
 					onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}>
-					Nom du plat
+					Désigantion de la table
 					<ArrowUpDown className="ml-2 h-4 w-4" />
 				</Button>
 			);
 		},
 	},
 	{
-		accessorKey: "pu",
-		header: () => <div className="text-center">PU</div>,
+		accessorKey: "nbrPlace",
+		header: () => <div className="text-center">Nbr de place</div>,
 		cell: ({ row }) => {
 			return (
-				<div className="text-center font-bold">
-					{formatter.format(row.getValue("pu"))}
-				</div>
+				<div className="text-center font-bold">{row.getValue("nbrPlace")}</div>
 			);
 		},
 	},
@@ -50,19 +47,19 @@ export const columnsAndCallback = (
 			);
 		},
 		cell: ({ row }) => {
-			const menu: menu = row.original;
+			const table: Table = row.original;
 
 			return (
 				<div className="space-x-3 text-center">
-					<ModalMofi ModifierCallback={Refecth} menu={menu} />
+					{/* <ModalMofi ModifierCallback={Refecth} table={table} /> */}
 					<Button
 						variant="destructive"
 						onClick={() => {
-							DeleteMenuFct(
-								menu.idplat,
+							DeleteTableFct(
+								table.idtable,
 								Refecth,
-								NotifDeleteSucc,
-								NotifDeleteErr
+								NotifcationErr,
+								NotifcationDelete
 							);
 						}}>
 						Supprimer
@@ -77,22 +74,17 @@ export const columnsAndCallback = (
 //Fonction et autre
 //
 
-const formatter = new Intl.NumberFormat("fr-FR", {
-	style: "currency",
-	currency: "MGA",
-});
-
-const DeleteMenuFct = async (
+const DeleteTableFct = async (
 	idplat: string,
 	Refecth: () => Promise<void>,
-	NotifDeleteSucc: (Msg: string) => void,
-	NotifDeleteErr: (Msg: string) => void
+	NotifcationErr: (Msg: string) => void,
+	NotifcationDelete: (Msg: string) => void
 ) => {
 	try {
-		const rep = await axios.delete("/menus/" + idplat);
-		NotifDeleteSucc(idplat);
+		const rep = await axios.delete("/tables/" + idplat);
+		NotifcationDelete(idplat);
 		Refecth();
 	} catch (error: any) {
-		NotifDeleteErr(error.response.data);
+		NotifcationErr(error.response.data);
 	}
 };

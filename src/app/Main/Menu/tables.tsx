@@ -13,7 +13,7 @@ import {
 	useReactTable,
 } from "@tanstack/react-table";
 import { menu } from "../Model";
-import ModalAdd from "./Modal/ModalAdd";
+import ModalAdd from "./Modal/AddModal";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";

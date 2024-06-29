@@ -1,3 +1,4 @@
+import { Notif } from "@/app/Main/Notif";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import { DialogFooter } from "@/components/ui/dialog";
 import axios from "@/lib/axios";
@@ -12,6 +13,7 @@ export default function FormModifier({
 	menu,
 	ModifierCallback,
 }: ChildComponentProps) {
+	const { NotificationError, NotificationSuccessUpdate } = Notif();
 	const schema = z.object({
 		idplat: z.string().default(menu.idplat),
 		nomplat: z.string().default(menu.nomplat),
@@ -19,10 +21,11 @@ export default function FormModifier({
 	});
 	const onSubmit = async (data: menu) => {
 		try {
-			const rep = await axios.post("/menus", data);
+			await axios.put("/menus/" + data.idplat, data);
+			NotificationSuccessUpdate(data.idplat);
 			ModifierCallback();
-		} catch (error) {
-			console.log(error);
+		} catch (error: any) {
+			NotificationError(error.response.data);
 		}
 	};
 	return (

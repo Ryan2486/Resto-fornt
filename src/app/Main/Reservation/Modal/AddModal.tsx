@@ -8,18 +8,19 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { menu } from "../../Model";
-import FormModifier from "./Form/FormModifier";
-interface ChildComponentProps {
-	menu: menu;
-	ModifierCallback: () => void;
+import { Reservation } from "../../Model";
+import AddForm from "../Form/AddForm";
+
+interface Childrenprops {
+	AddDataFct: (newReservation: Reservation) => void;
 }
 
-export default function App({ menu, ModifierCallback }: ChildComponentProps) {
+export default function AddModal({ AddDataFct }: Childrenprops) {
 	const [isopen, setopen] = useState<boolean>(false);
-	const ModalCallback = () => {
-		ModifierCallback();
+
+	const AddModalCallBack = (newReservation: Reservation) => {
 		setopen(false);
+		AddDataFct(newReservation);
 	};
 	return (
 		<Dialog open={isopen} onOpenChange={setopen}>
@@ -29,17 +30,17 @@ export default function App({ menu, ModifierCallback }: ChildComponentProps) {
 					onClick={() => {
 						setopen(true);
 					}}>
-					Modifier
+					Ajouter
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Ajouter Plat</DialogTitle>
+					<DialogTitle>Ajouter une reservation</DialogTitle>
 					<DialogDescription>
-						Modifier un plat dans votre magnifique restaurant
+						Ajouter une reservation dans votre magnifique restaurant
 					</DialogDescription>
 				</DialogHeader>
-				<FormModifier menu={menu} ModifierCallback={ModalCallback} />
+				<AddForm ModalCallBack={AddModalCallBack} />
 			</DialogContent>
 		</Dialog>
 	);
