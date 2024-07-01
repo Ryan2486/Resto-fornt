@@ -1,11 +1,11 @@
-import { Notif } from "@/app/Main/Notif";
+import { menu } from "@/Personnaliser/Model";
+import { Notif } from "@/Personnaliser/Notif";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import { DialogFooter } from "@/components/ui/dialog";
 import axios from "@/lib/axios";
 import z from "zod";
-import { menu } from "../../../Model";
 interface ChildComponentProps {
-	AddCallbackModal: (data: menu, close: boolean) => void;
+	AddCallbackModal: (data: menu) => void;
 }
 
 export default function FormAdd({ AddCallbackModal }: ChildComponentProps) {
@@ -19,7 +19,7 @@ export default function FormAdd({ AddCallbackModal }: ChildComponentProps) {
 		await axios
 			.post("/menus", data)
 			.then((rep) => {
-				AddCallbackModal(rep.data, false);
+				AddCallbackModal(rep.data);
 				NotificationSuccessAdd(rep.data.idplat);
 			})
 			.catch((error) => {

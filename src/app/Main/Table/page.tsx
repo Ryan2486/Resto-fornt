@@ -1,14 +1,17 @@
 "use client";
 
+import { DataTable } from "@/Personnaliser/DataTable";
+import Modal from "@/Personnaliser/Modal";
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
-import { Table } from "../Model";
-import { Notif } from "../Notif";
+import { Table } from "../../../Personnaliser/Model";
+import { Notif } from "../../../Personnaliser/Notif";
+import AddForm from "./Modal/Form/AddForm";
 import { columnsAndCallback } from "./columns";
-import { DataTable } from "./tables";
 
 export default function page() {
 	const [tables, setTables] = useState<Table[]>([]);
+	const [isOpenModal, setOpenModal] = useState<boolean>(false);
 	const { NotificationError, NotificationSuccessDelete } = Notif();
 	const fetchData = async () => {
 		try {
@@ -21,6 +24,11 @@ export default function page() {
 	useEffect(() => {
 		fetchData();
 	}, []);
+
+	const AddCallback = (newTable: Table) => {
+		setOpenModal(false);
+		setTables((prev) => [...prev, newTable]);
+	};
 	const columns = columnsAndCallback(
 		fetchData,
 		NotificationError,
@@ -28,7 +36,20 @@ export default function page() {
 	);
 	return (
 		<div>
-			<DataTable columns={columns} data={tables}></DataTable>
+			<DataTable
+				columns={columns}
+				columnsRech="designation"
+				placeholderInput="Filter designation..."
+				data={tables}>
+				<Modal
+					isopen={isOpenModal}
+					setopen={setOpenModal}
+					TitleBtn="Ajouter"
+					TitleModal="Ajouter Table"
+					Description="Ajouter une table dans votre magnifique réstaurant">
+					<AddForm AddCallback={AddCallback}></AddForm>
+				</Modal>
+			</DataTable>
 		</div>
 	);
 }

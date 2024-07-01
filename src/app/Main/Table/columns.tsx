@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { Table } from "../Model";
+import { Table } from "../../../Personnaliser/Model";
 
 export const columnsAndCallback = (
 	Refecth: () => Promise<void>,

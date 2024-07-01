@@ -8,7 +8,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { Reservation } from "../../Model";
+import { Reservation } from "../../../../Personnaliser/Model";
 import AddForm from "../Form/AddForm";
 
 interface Childrenprops {

@@ -8,8 +8,8 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { menu } from "../../Model";
-import FormAdd from "./Form/AddModal";
+import { menu } from "../../../../Personnaliser/Model";
+import FormAdd from "./Form/AddForm";
 interface ChildComponentProps {
 	AddCallback: (data: menu) => void;
 }

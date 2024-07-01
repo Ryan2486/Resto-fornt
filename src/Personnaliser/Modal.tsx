@@ -7,15 +7,25 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from "@/components/ui/dialog";
-import { useState } from "react";
-import { menu } from "../../Model";
+import { Dispatch, SetStateAction } from "react";
 
-export default function DialogDemo() {
-	const [isopen, setopen] = useState<boolean>(false);
-	const AddCallbackModal = (menu: menu) => {
-		setopen(false);
-	};
+interface Modalprops {
+	children?: React.ReactNode;
+	TitleModal: string;
+	TitleBtn: string;
+	isopen: boolean;
+	setopen: Dispatch<SetStateAction<boolean>>;
+	Description?: string;
+}
 
+export default function Modal({
+	children,
+	TitleModal,
+	TitleBtn,
+	isopen,
+	setopen,
+	Description,
+}: Modalprops) {
 	return (
 		<Dialog open={isopen} onOpenChange={setopen}>
 			<DialogTrigger asChild>
@@ -24,17 +34,15 @@ export default function DialogDemo() {
 					onClick={() => {
 						setopen(true);
 					}}>
-					Ajouter
+					{TitleBtn}
 				</Button>
 			</DialogTrigger>
 			<DialogContent className="sm:max-w-[425px]">
 				<DialogHeader>
-					<DialogTitle>Ajouter Table</DialogTitle>
-					<DialogDescription>
-						Ajouter des tables dans votre magnifique restaurant
-					</DialogDescription>
+					<DialogTitle>{TitleModal}</DialogTitle>
+					<DialogDescription>{Description}</DialogDescription>
 				</DialogHeader>
-				{/* <FormAdd AddCallbackModal={AddCallbackModal} /> */}
+				{children}
 			</DialogContent>
 		</Dialog>
 	);

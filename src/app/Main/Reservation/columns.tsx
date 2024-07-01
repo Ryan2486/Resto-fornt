@@ -5,7 +5,7 @@ import axios from "@/lib/axios";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
 import moment from "moment";
-import { Reservation } from "../Model";
+import { Reservation } from "../../../Personnaliser/Model";
 import ModalModifier from "./Modal/UpdateModal";
 
 export const columnsAndCallback = (

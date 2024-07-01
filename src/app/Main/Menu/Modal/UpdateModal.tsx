@@ -8,7 +8,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { menu } from "../../Model";
+import { menu } from "../../../../Personnaliser/Model";
 import FormModifier from "./Form/UpdateModal";
 interface ChildComponentProps {
 	menu: menu;

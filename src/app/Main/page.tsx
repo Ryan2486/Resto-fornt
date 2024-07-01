@@ -1,12 +1,12 @@
 "use client";
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
-import ChartRecette from "./ChartRecette";
+import ChartRecette from "./Dasboard/ChartRecette";
+import RecetteTotal from "./Dasboard/RecetteTotal";
+import ReservationDispo from "./Dasboard/ReservationDispo";
+import Top10Plat from "./Dasboard/Top10Plat";
 import ListePlat from "./ListePlat.json";
-import RecetteTotal from "./RecetteTotal";
-import ReservationDispo from "./ReservationDispo";
 import Reservationdata from "./Reserver.json";
-import Top10Plat from "./Top10Plat";
 
 interface Reservation {
 	nom: string;

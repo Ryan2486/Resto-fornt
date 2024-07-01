@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import axios from "@/lib/axios";
 import { ColumnDef } from "@tanstack/react-table";
 import { ArrowUpDown } from "lucide-react";
-import { menu } from "../Model";
+import { menu } from "../../../Personnaliser/Model";
 import ModalMofi from "./Modal/UpdateModal";
 
 export const columnsAndCallback = (

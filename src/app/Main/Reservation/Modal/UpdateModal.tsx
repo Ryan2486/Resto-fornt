@@ -10,7 +10,7 @@ import {
 	DialogTrigger,
 } from "@/components/ui/dialog";
 import { useState } from "react";
-import { Reservation } from "../../Model";
+import { Reservation } from "../../../../Personnaliser/Model";
 import UpdateForm from "../Form/UpdateForm";
 interface ChildComponentProps {
 	reservation: Reservation;

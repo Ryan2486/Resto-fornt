@@ -1,16 +1,6 @@
 "use client";
 import * as React from "react";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import {
-	Table,
-	TableBody,
-	TableCell,
-	TableHead,
-	TableHeader,
-	TableRow,
-} from "@/components/ui/table";
 import {
 	ColumnDef,
 	ColumnFiltersState,
@@ -22,16 +12,32 @@ import {
 	getSortedRowModel,
 	useReactTable,
 } from "@tanstack/react-table";
-import AddModal from "./Modal/AddModal";
+
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import {
+	Table,
+	TableBody,
+	TableCell,
+	TableHead,
+	TableHeader,
+	TableRow,
+} from "@/components/ui/table";
 
 interface DataTableProps<TData, TValue> {
 	columns: ColumnDef<TData, TValue>[];
+	columnsRech: string;
+	placeholderInput: string;
 	data: TData[];
+	children: React.ReactNode;
 }
 
 export function DataTable<TData, TValue>({
 	columns,
+	columnsRech,
+	placeholderInput,
 	data,
+	children,
 }: DataTableProps<TData, TValue>) {
 	const [sorting, setSorting] = React.useState<SortingState>([]);
 	const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
@@ -55,17 +61,15 @@ export function DataTable<TData, TValue>({
 	return (
 		<div>
 			<div className="flex flex-row space-x-4">
-				<div className="flex items-center py-4">
-					<AddModal></AddModal>
-				</div>
+				<div className="flex items-center py-4">{children}</div>
 				<div className="flex items-center py-4">
 					<Input
-						placeholder="Filter designation..."
+						placeholder={placeholderInput}
 						value={
-							(table.getColumn("designation")?.getFilterValue() as string) ?? ""
+							(table.getColumn(columnsRech)?.getFilterValue() as string) ?? ""
 						}
 						onChange={(event) =>
-							table.getColumn("designation")?.setFilterValue(event.target.value)
+							table.getColumn(columnsRech)?.setFilterValue(event.target.value)
 						}
 						className="max-w-sm"
 					/>

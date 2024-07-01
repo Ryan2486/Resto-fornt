@@ -5,7 +5,7 @@ import { DialogFooter } from "@/components/ui/dialog";
 import axios from "@/lib/axios";
 import { useEffect, useState } from "react";
 import z from "zod";
-import { Reservation, Table } from "../../Model";
+import { Reservation, Table } from "../../../../Personnaliser/Model";
 
 interface Childrenprops {
 	Reservation: Reservation;

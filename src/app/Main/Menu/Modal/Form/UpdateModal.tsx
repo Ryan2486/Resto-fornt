@@ -1,9 +1,9 @@
-import { Notif } from "@/app/Main/Notif";
+import { Notif } from "@/Personnaliser/Notif";
 import AutoForm, { AutoFormSubmit } from "@/components/ui/auto-form";
 import { DialogFooter } from "@/components/ui/dialog";
 import axios from "@/lib/axios";
 import z from "zod";
-import { menu } from "../../../Model";
+import { menu } from "../../../../../Personnaliser/Model";
 interface ChildComponentProps {
 	menu: menu;
 	ModifierCallback: () => void;
